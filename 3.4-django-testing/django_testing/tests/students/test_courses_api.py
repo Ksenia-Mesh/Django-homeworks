@@ -1,8 +1,4 @@
-# def test_example():
-#     assert False, "Just test example"
 
-
-# from _pytest import python
 from model_bakery import baker
 from rest_framework.test import APIClient
 import pytest
@@ -27,17 +23,6 @@ def student_factory():
         return baker.make(Student, *args, **kwargs)
 
     return factory
-
-#
-# @pytest.fixture
-# def student():
-#     return Student.objects.create(name='Ksenia')
-
-
-
-
-
-
 
 @pytest.mark.django_db
 def test_get_course(api_client, course_factory):
