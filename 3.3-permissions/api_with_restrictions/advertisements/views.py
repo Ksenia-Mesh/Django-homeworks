@@ -9,7 +9,9 @@ class AdvertisementViewSet(ModelViewSet):
 
     queryset = Advertisement.objects.all()
     serializer_class = AdvertisementSerializer
-    filterset_fields = ['created_at', 'status', 'creator']
+    throttle_classes = [AnonRateThrottle]
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = AdvertisementFilter
 
     def get_permissions(self):
         """Получение прав для действий."""
