@@ -33,8 +33,8 @@ class AdvertisementSerializer(serializers.ModelSerializer):
         return super().create(validated_data)
 
     def validate(self, data):
-        if data.get('status') == 'OPEN':
-            if Advertisement.objects.filter(status='OPEN').count() > 10:
+        if data.get('status') == 'OPEN' and self.context["request"].method == 'POST':
+            if Advertisement.objects.filter(creator=self.context["request"].user).filter(status='OPEN').count() > 10:
                 raise ValidationError('У вас больше 10 открытых объявлений')
 
         return data
